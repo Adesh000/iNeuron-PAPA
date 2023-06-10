@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Debouncing Example</title>
+  </head>
+  <body>
+    <h1>Debouncing Example</h1>
+    <input type="text" id="searchInput" placeholder="search" />
+    <ul id="searchResults"></ul>
+
+    <script>
+      //Debounce Function
+      const debouce = (func, delay) => {
+        let timeoutId;
+        return function () {
+          clearTimeout(timeoutId);
+
+          timeoutId = setTimeout(func, delay);
+        };
+      };
+
+      //perform search operation
+      const performSearch = () => {
+        const searchTerm = document.getElementById("searchInput").value;
+        const searchResultsElement = document.getElementById("searchResults");
+
+        //Simulating an API call with a delay
+        setTimeout(() => {
+          //Clear previous result
+          searchResultsElement.innerHTML = " ";
+
+          //Perform search operation and display search results
+          for (let i = 1; i <= 5; i++) {
+            const resultItem = document.createElement("li");
+            resultItem.textContent = `Result ${i} for ${searchTerm}`;
+            searchResultsElement.appendChild(resultItem);
+          }
+        }, 500);
+      };
+
+      //Debounce search function
+      const debouncedSearch = debouce(performSearch, 300);
+
+      //Attach event listener to search input
+      const searchInput = document.getElementById("searchInput");
+      searchInput.addEventListener("input", debouncedSearch);
+    </script>
+  </body>
+</html>
