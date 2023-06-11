@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext, } from "react";
 import { ThemeProvider, ThemeContext } from "./themeChanger";
 import "./App.css";
 
@@ -14,7 +14,7 @@ const App = () => {
 };
 
 const Header = () => {
-  const { theme, toggleTheme } = React.useContext(ThemeContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
     <header className={theme}>
@@ -25,7 +25,7 @@ const Header = () => {
 };
 
 const MainContent = () => {
-  const { theme } = React.useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <main className={theme}>
